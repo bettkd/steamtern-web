@@ -53,10 +53,15 @@
     white-space: pre-wrap;
     word-break: break-all;
   }
-  h3 {
-    background: url('firebase-logo.png') no-repeat;
+  h3 { 
     background-size: 40px;
     padding-left: 50px;
+    color: white;
+  }
+  h3.logo {
+    background: url('steamtern-logo.jpg') no-repeat 15px -8px;
+    background-size: 40px;
+    padding-left: 70px;
     color: white;
   }
   .close-icon {
@@ -174,5 +179,5 @@
       background-color: #039be5 !important;
   }
   section#page-splash {
-    background: purple;
+    background-color:#691d99;
 }
