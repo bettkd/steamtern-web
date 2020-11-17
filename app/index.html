@@ -12,6 +12,7 @@
   limitations under the License
 -->
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -39,54 +40,256 @@
 
   <!-- Material Design Lite -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.blue_grey-orange.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
-  
+  <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.blue_grey-orange.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.26.0/slimselect.min.css" rel="stylesheet">
+  </link>
+
   <link rel="stylesheet" href="css/main.css">
 
 </head>
+
 <body>
-<div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
 
 
-  <!-- Splash screen -->
-  <section id="page-splash">
-    <h3 class="logo">STEAMtern</h3>
-    <div>
-      <button id="sign-out-button" class="mdl-button--raised mdl-button mdl-js-button mdl-js-ripple-effect"><i class="material-icons">account_circle</i> Sign out</button>
-    </div>
-  </section>
-
-  <!-- Header section containing logo and menu -->
-  <header class="header mdl-layout__header mdl-color-text--white mdl-color--light-blue-700">
-
-    <div class="mdl-layout__header-row titlebar">
-      <h3>Internships</h3>
-    </div>
-
-    <!-- Navigation Bar -->
-    <div class="tab mdl-layout__header-row mdl-color--light-blue-600">
-      <div class="mdl-tab">
-        <div id="menu-recent" class="mdl-layout__tab is-active mdl-button mdl-js-button mdl-js-ripple-effect">
-          <i class="material-icons">new_releases</i> List
-        </div>
-        <div id="menu-my-posts" class="mdl-layout__tab mdl-button mdl-js-button mdl-js-ripple-effect">
-          <i class="material-icons">home</i> View
-        </div>
-        <div id="menu-my-top-posts" class="mdl-layout__tab mdl-button mdl-js-button mdl-js-ripple-effect">
-          <i class="material-icons">trending_up</i> Edit
-        </div>
-        <button disabled class="mdl-button mdl-js-button mdl-button--fab mdl-color--amber-400 mdl-shadow--4dp mdl-js-ripple-effect" id="add" title="Create New Internship">
-          <i class="material-icons">mode_edit</i>
-        </button>
+    <!-- Splash screen -->
+    <section id="page-splash">
+      <h3 class="logo">STEAMtern</h3>
+      <div>
+        <button id="sign-out-button" class="mdl-button--raised mdl-button mdl-js-button mdl-js-ripple-effect"><i
+            class="material-icons">account_circle</i> Sign out</button>
       </div>
-    </div>
-  </header>
+    </section>
 
-  <main class="mdl-layout__content mdl-color--grey-100">
+    <!-- Header section containing logo and menu -->
+    <header class="header mdl-layout__header mdl-color-text--white mdl-color--light-blue-700">
 
-    <!-- Show the add post form -->
-    <section class="mdl-grid content" id="add-post" style="display:none">
-      <div class="mdl-cell mdl-cell--12-col mdl-grid">
+      <div class="mdl-layout__header-row titlebar">
+        <h3>Internships</h3>
+      </div>
+
+      <!-- Navigation Bar -->
+      <div class="tab mdl-layout__header-row mdl-color--light-blue-600">
+        <div class="mdl-tab">
+          <div id="menu-recent" class="mdl-layout__tab is-active mdl-button mdl-js-button mdl-js-ripple-effect hidden">
+            <i class="material-icons">new_releases</i> List
+          </div>
+          <div id="menu-my-posts" class="mdl-layout__tab mdl-button mdl-js-button mdl-js-ripple-effect">
+            <i class="material-icons">home</i> View Internships
+          </div>
+          <div id="menu-my-top-posts" class="mdl-layout__tab mdl-button mdl-js-button mdl-js-ripple-effect hidden">
+            <i class="material-icons">trending_up</i> Edit
+          </div>
+          <button
+            class="mdl-button mdl-js-button mdl-button--fab mdl-color--grey-200 mdl-shadow--4dp mdl-js-ripple-effect"
+            id="add-internship" title="Create New Internship">
+            <i class="material-icons">mode_edit</i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="mdl-layout__content mdl-color--grey-100">
+
+      <!-- Show the add post form -->
+      <dialog class="mdl-dialog">
+        <h4 class="mdl-dialog__title mdl-color-text--light-blue-600">Add Internship</h4>
+        <form id="new-internship-form" action="#">
+          <div class="mdl-dialog__content">
+
+            <!-- Name -->
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="text" id="new-name">
+              <label class="mdl-textfield__label" for="new-name">Enter the title</label>
+            </div>
+            <!-- Discipline -->
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <select class="mdl-textfield__input" name="new-discipline" id="new-discipline" multiple>
+                <option value="Agriculture"> Agriculture</option>
+                <option value="Biological Sciences/Biology"> Biological Sciences/Biology</option>
+                <option value="Biomedical Sciences"> Biomedical Sciences</option>
+                <option value="Biotechnology"> Biotechnology</option>
+                <option value="Biochemistry"> Biochemistry</option>
+                <option value="Environmental Science"> Environmental Science</option>
+                <option value="Marine Science"> Marine Science</option>
+                <option value="Botany/Plant Science"> Botany/Plant Science</option>
+                <option value="Microbiology"> Microbiology</option>
+                <option value="Physiology"> Physiology</option>
+                <option value="Neuroscience"> Neuroscience</option>
+                <option value="Public Health"> Public Health</option>
+                <option value="Pharmacology"> Pharmacology</option>
+                <option value="Cell/Molecular Biology"> Cell/Molecular Biology</option>
+                <option value="Chemistry"> Chemistry</option>
+                <option value="Bioinformatics"> Bioinformatics</option>
+                <option value="Biomedical Engineering"> Biomedical Engineering</option>
+                <option value="Electrical Engineering"> Electrical Engineering</option>
+                <option value="Mechanical Engineering"> Mechanical Engineering</option>
+                <option value="Civil Engineering"> Civil Engineering</option>
+                <option value="Information Technology"> Information Technology</option>
+                <option value="Forensic Science"> Forensic Science</option>
+                <option value="Physics"> Physics</option>
+                <option value="Mathematics"> Mathematics</option>
+                <option value="Computer Science"> Computer Science</option>
+                <option value="Geology"> Geology</option>
+                <option value="Marketing"> Marketing</option>
+                <option value="Accounting"> Accounting</option>
+                <option value="Finance"> Finance </option>
+                <option value="Business Administration"> Business Administration</option>
+                <option value="Management Information Systems"> Management Information Systems</option>
+                <option value="Criminal Justice/Criminology"> Criminal Justice/Criminology</option>
+                <option value="Political Science"> Political Science</option>
+                <option value="Communications"> Communications</option>
+                <option value="Music"> Music</option>
+                <option value="Performing Arts"> Performing Arts</option>
+                <option value="Teacher Education"> Teacher Education</option>
+                <option value="Behavioral Sciences/Psychology"> Behavioral Sciences/Psychology</option>
+                <option value="Social Sciences "> Social Sciences </option>
+                <option value="Religion/Theology"> Religion/Theology</option>
+                <option value="Philosophy"> Philosophy</option>
+                <option value="Visual Arts"> Visual Arts</option>
+                <option value="Studio Art"> Studio Art</option>
+                <option value="Fashion Merchandising"> Fashion Merchandising</option>
+              </select>
+              <label class="mdl-textfield__label" for="new-discipline"></label>
+            </div>
+            <!-- Institution -->
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="text" id="new-institution">
+              <label class="mdl-textfield__label" for="new-institution">Enter the institution</label>
+            </div>
+            <!-- City -->
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="text" id="new-city">
+              <label class="mdl-textfield__label" for="new-city">Enter the city</label>
+            </div>
+            <!-- State -->
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="text" id="new-state">
+              <label class="mdl-textfield__label" for="new-state">Enter the state</label>
+            </div>
+            <!-- Country -->
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="text" id="new-country">
+              <label class="mdl-textfield__label" for="new-country">Enter the country</label>
+            </div>
+            <!-- Description -->
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <textarea class="mdl-textfield__input" type="text" rows="2" id="new-description"></textarea>
+              <label class="mdl-textfield__label" for="new-description">Enter the description</label>
+            </div>
+            <!-- Website -->
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="url" id="new-website">
+              <label class="mdl-textfield__label" for="new-website">Enter the website</label>
+            </div>
+            <!-- Duration -->
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="number" id="new-duration">
+              <label class="mdl-textfield__label" for="new-duration">Enter the duration (weeks)</label>
+            </div>
+            <!-- Salary -->
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="number" id="new-salary">
+              <label class="mdl-textfield__label" for="new-salary">Enter the salary (dollars)</label>
+            </div>
+            <!-- Courses -->
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="text" id="new-courses">
+              <label class="mdl-textfield__label" for="new-courses">Enter the courses</label>
+            </div>
+            <!-- GPA -->
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="number" step=0.01 id="new-gpa">
+              <label class="mdl-textfield__label" for="new-gpa">Enter the GPA</label>
+            </div>
+            <!-- Citizenship -->
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <select class="mdl-textfield__input" id="new-citizenship" name="new-citizenship" multiple>
+                <option value="n-a"> N/A </option>
+                <option value="us-citizen"> US Citizen </option>
+                <option value="permanent-resident"> Permanent Resident </option>
+                <option value="f1-student-visa"> F1 Student Visa </option>
+              </select>
+              <label class="mdl-textfield__label" for="new-citizenship"></label>
+            </div>
+            <!-- Minority -->
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <select class="mdl-textfield__input" id="new-minority" name="new-minority" multiple>
+                <option value="N/A"> N/A</option>
+                <option value="African American/Black"> African American/Black</option>
+                <option value="Hispanic"> Hispanic</option>
+                <option value="Native American"> Native American</option>
+                <option value="Aative Alaskan"> Native Alaskan</option>
+                <option value="Pacific Islander"> Pacific Islander</option>
+                <option value="Native Hawaiian"> Native Hawaiian</option>
+                <option value="Polynesian"> Polynesian</option>
+              </select>
+              <label class="mdl-textfield__label" for="new-minority"></label>
+            </div>
+            <!-- Classification -->
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <select class="mdl-textfield__input" id="new-classification" name="new-classification" multiple>
+                <option value="N/A"> N/A</option>
+                <option value="Freshman"> Freshman</option>
+                <option value="Sophomore"> Sophomore</option>
+                <option value="Junior"> Junior</option>
+                <option value="Senior"> Senior</option>
+              </select>
+              <label class="mdl-textfield__label" for="new-classification"></label>
+            </div>
+            <!-- Submission -->
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <select class="mdl-textfield__input" id="new-submision" name="new-submision" multiple>
+                <option value="N/A"> N/A</option>
+                <option value="Online"> Online</option>
+                <option value="Email"> Email</option>
+                <option value="Mail"> Mail</option>
+              </select>
+              <label class="mdl-textfield__label" for="new-submission"></label>
+            </div>
+            <!-- Personal Statement -->
+            <label id="new-statement" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+              <input type="checkbox" class="mdl-checkbox__input" value='0' />
+              <span class="mdl-checkbox__label">Personal statement</span>
+            </label>
+            <!-- Recommendation -->
+            <label id="new-recommendation" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+              <input type="checkbox" class="mdl-checkbox__input" value='0' />
+              <span class="mdl-checkbox__label">Recommendation</span>
+            </label>
+            <!-- Transcript -->
+            <label id="new-transcript" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+              <input type="checkbox" class="mdl-checkbox__input" value='0' />
+              <span class="mdl-checkbox__label">Transcript</span>
+            </label>
+            <!-- Housing -->
+            <label id="new-housing" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+              <input type="checkbox" class="mdl-checkbox__input" value='0' />
+              <span class="mdl-checkbox__label">Housing</span>
+            </label>
+            <!-- Transportation -->
+            <label id="new-transportation" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+              <input type="checkbox" class="mdl-checkbox__input" value='0' />
+              <span class="mdl-checkbox__label">Transportation</span>
+            </label>
+            <!-- Deadline -->
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="date" id="new-deadline">
+              <label class="mdl-textfield__label" for="new-deadline">Deadline</label>
+            </div>
+          </div>
+          <div class="mdl-dialog__actions">
+            <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect close"> Submit
+            </button>
+            <button type="button" class="mdl-button close">Cancel</button>
+          </div>
+        </form>
+      </dialog>
+
+
+      <section class="mdl-grid content" id="add-post" style="display:none">
+        <div class="mdl-cell mdl-cell--12-col mdl-grid">
 
           <!-- Card containing the inputs to add a new messages -->
           <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet
@@ -109,60 +312,100 @@
                 </button>
               </form>
             </div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="mdl-grid content" id="internships-list" style="display:block">
-      <div class="posts-container mdl-cell mdl-cell--12-col mdl-grid">
-        	<table id="internListTable" class="display" width="100%"></table>
-      </div>
-    </section>
+      <section class="mdl-grid content" id="internships-list" style="display:block">
+        <div class="posts-container mdl-cell mdl-cell--12-col mdl-grid">
+          <table id="internListTable" class="display" width="100%"></table>
+        </div>
+      </section>
 
-    <!-- Show a list of recent posts -->
-    <section class="mdl-grid content" id="recent-posts-list" style="display:none">
-      <div class="posts-container mdl-cell mdl-cell--12-col mdl-grid">
-        List
-      </div>
-    </section>
+      <!-- Show a list of recent posts -->
+      <section class="mdl-grid content" id="recent-posts-list" style="display:none">
+        <div class="posts-container mdl-cell mdl-cell--12-col mdl-grid">
+        </div>
+      </section>
 
-    <!-- Show the list of user's posts -->
-    <section class="mdl-grid content" id="user-posts-list" style="display:none">
-      <div class="posts-container mdl-cell mdl-cell--12-col mdl-grid">
-        View Datails
-      </div>
-    </section>
+      <!-- Show the list of user's posts -->
+      <section class="mdl-grid content" id="user-posts-list" style="display:none">
+        <div class="posts-container mdl-cell mdl-cell--12-col mdl-grid">
+        </div>
+      </section>
 
-    <!-- Show the list of top user's posts -->
-    <section class="mdl-grid content" id="top-user-posts-list" style="display:none">
-      <div class="posts-container mdl-cell mdl-cell--12-col mdl-grid">
-        Edit Internship
-      </div>
-    </section>
-  </main>
-</div>
+      <!-- Show the list of top user's posts -->
+      <section class="mdl-grid content" id="top-user-posts-list" style="display:none">
+        <div class="posts-container mdl-cell mdl-cell--12-col mdl-grid">
+        </div>
+      </section>
+    </main>
+  </div>
 
-<!-- Import and configure the Firebase SDK -->
-<!-- These scripts are made available when the app is served or deployed on Firebase Hosting -->
-<!-- If you do not serve/host your project using Firebase Hosting see https://firebase.google.com/docs/web/setup -->
-<!--
+  <!-- Import and configure the Firebase SDK -->
+  <!-- These scripts are made available when the app is served or deployed on Firebase Hosting -->
+  <!-- If you do not serve/host your project using Firebase Hosting see https://firebase.google.com/docs/web/setup -->
+  <!--
 <script src="/__/firebase/8.0.1/firebase-app.js"></script>
 <script src="/__/firebase/8.0.1/firebase-auth.js"></script>
 <script src="/__/firebase/8.0.1/firebase-database.js"></script>
 <script src="/__/firebase/init.js"></script>
 -->
 
-<script
-  src="https://code.jquery.com/jquery-3.5.1.min.js"
-  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-  crossorigin="anonymous"></script>
-<script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-database.js"></script>
-<script src="scripts/init.js"></script>
+  <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.26.0/slimselect.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-database.js"></script>
+  <script src="scripts/init.js"></script>
+  <script src="scripts/main.js"></script>
 
-<script src="scripts/main.js"></script>
+
+  <script>
+    $(document).ready(function () {
+
+      // Dialog
+      var dialog = document.querySelector('dialog');
+      var showDialogButton = document.querySelector('#add-internship');
+      if (!dialog.showModal) {
+        dialogPolyfill.registerDialog(dialog);
+      }
+      showDialogButton.addEventListener('click', function () {
+        dialog.showModal();
+      });
+      const close_items = dialog.querySelectorAll('.close');
+      close_items.forEach(close => close.addEventListener('click', function () { dialog.close(); }));
+
+      // Multi-select input box
+      new SlimSelect({
+        select: '#new-discipline',
+        placeholder: 'Select the discipline'
+      });
+      new SlimSelect({
+        select: '#new-citizenship',
+        placeholder: 'Select the citizenship'
+      });
+      new SlimSelect({
+        select: '#new-minority',
+        placeholder: 'Select the minority'
+      });
+      new SlimSelect({
+        select: '#new-classification',
+        placeholder: 'Select the classification'
+      });
+      new SlimSelect({
+        select: '#new-submision',
+        placeholder: 'Select the submission'
+      });
+
+    });
+
+  </script>
+
 </body>
+
 </html>

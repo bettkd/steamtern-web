@@ -18,13 +18,14 @@
 
 // Shortcuts to DOM Elements.
 var messageForm = document.getElementById('message-form');
+var newInternshipForm = document.getElementById('new-internship-form');
 var messageInput = document.getElementById('new-post-message');
 var titleInput = document.getElementById('new-post-title');
 //var signInButton = document.getElementById('sign-in-button');
 var signOutButton = document.getElementById('sign-out-button');
 var splashPage = document.getElementById('page-splash');
-var addPost = document.getElementById('add-post');
-var addButton = document.getElementById('add');
+//var addPost = document.getElementById('add-post');
+var addInternshipButton = document.getElementById('add-internship');
 var internshipsSection = document.getElementById('internships-list');
 var recentPostsSection = document.getElementById('recent-posts-list');
 var userPostsSection = document.getElementById('user-posts-list');
@@ -395,7 +396,7 @@ function startDatabaseQueries() {
                 internship.deadline = intern.deadline || 'NA'
                 internship.submision = intern.submision || 'NA'
                 internship.added = intern.added || 'NA'
-                //console.log(JSON.stringify(data.val()));
+                console.log(JSON.stringify(data.val()));
                 internshipList.push(internship);
                 //var containerElement = sectionElement.getElementsByClassName('posts-container')[0];
                 //containerElement.insertBefore(
@@ -498,6 +499,19 @@ function newPostForCurrentUser(title, text) {
     // [END single_value_read]
 }
 
+function writeNewInternship(internshipData) {
+
+    // Get a key for a new Post.
+    var newInternshipKey= firebase.database().ref().child('internships').push().key;
+
+    // Write the new post's data simultaneously in the posts list and the user's post list.
+    var updates = {};
+    updates['/internships/' + newInternshipKey] = internshipData;
+    //updates['/user-posts/' + uid + '/' + newInternshipKey] = internshipData;
+
+    return firebase.database().ref().update(updates);
+}
+
 /**
  * Displays the given section element and changes styling of the given button.
  */
@@ -505,7 +519,7 @@ function showSection(sectionElement, buttonElement) {
     recentPostsSection.style.display = 'none';
     userPostsSection.style.display = 'none';
     topUserPostsSection.style.display = 'none';
-    addPost.style.display = 'none';
+    //addPost.style.display = 'none';
     recentMenuButton.classList.remove('is-active');
     myPostsMenuButton.classList.remove('is-active');
     myTopPostsMenuButton.classList.remove('is-active');
@@ -547,6 +561,65 @@ window.addEventListener('load', function () {
             titleInput.value = '';
         }
     };
+    
+    // Saves new internship on form submit
+    newInternshipForm.onsubmit = function (e) {
+        e.preventDefault();
+        var name = document.getElementById('new-name').value;
+        var discipline = $('#new-discipline').val();
+        var institution = document.getElementById('new-institution').value;
+        var city = document.getElementById('new-city').value;
+        var state = document.getElementById('new-state').value;
+        var country = document.getElementById('new-country').value;
+        var description = document.getElementById('new-description').value;
+        var website = document.getElementById('new-website').value;
+        var duration = parseFloat(document.getElementById('new-duration').value);
+        var salary = parseFloat(document.getElementById('new-salary').value);
+        var courses = document.getElementById('new-courses').value;
+        var housing = $('#new-housing').is('.is-checked')?'Yes':'No'; //document.getElementById('new-housing').value;
+        var transportation = $('#new-housing').is('.is-checked')?'Yes':'No'; //document.getElementById('new-transportation').value;
+        var citizenship = $('#new-citizenship').val();
+        var minority = $('#new-minority').val();
+        var classification = $('#new-classification').val();
+        var gpa = parseFloat(document.getElementById('new-gpa').value);
+        var statement = $('#new-statement').is('.is-checked')?'Yes':'No'; //document.getElementById('new-statement').value;
+        var recommendation = $('#new-recommendation').is('.is-checked')?'Yes':'No'; //document.getElementById('new-recommendation').value;
+        var transcript = $('#new-transcript').is('.is-checked')?'Yes':'No'; //document.getElementById('new-transcript').value;
+        var deadline = document.getElementById('new-deadline').value;
+        var submision = $('#new-submision').val();
+
+        let today = new Date().toISOString().slice(0, 10)
+
+        var internshipData = {
+            name: name || 'N/A',
+            discipline: discipline || 'N/A',
+            institution: institution || 'N/A',
+            city: city || 'N/A',
+            state: state || 'N/A',
+            country: country || 'N/A',
+            description: description || 'N/A',
+            website: website || 'N/A',
+            duration: duration || 'N/A',
+            salary: salary || 'N/A',
+            courses: courses || 'N/A',
+            housing: housing || 'N/A',
+            transportation: transportation || 'N/A',
+            citizenship: citizenship || 'N/A',
+            minority: minority || 'N/A',
+            classification: classification || 'N/A',
+            gpa: gpa || 'N/A',
+            statement: statement || 'N/A',
+            recommendation: recommendation || 'N/A',
+            transcript: transcript || 'N/A',
+            deadline: deadline || 'N/A',
+            submision: submision || 'N/A',
+            added: today
+        };
+
+        writeNewInternship(internshipData).then(function(){
+            alert("Internship saved!");
+        });
+    };
 
     // Bind menu buttons.
     recentMenuButton.onclick = function () {
@@ -558,8 +631,8 @@ window.addEventListener('load', function () {
     myTopPostsMenuButton.onclick = function () {
         showSection(topUserPostsSection, myTopPostsMenuButton);
     };
-    addButton.onclick = function () {
-        showSection(addPost);
+    addInternshipButton.onclick = function () {
+        //showSection(addPost);
         messageInput.value = '';
         titleInput.value = '';
     };

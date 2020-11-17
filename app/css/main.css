@@ -83,6 +83,9 @@
   #verify-code-button, #cancel-verify-code-button {
     margin-left: 20px;
   }
+  #sign-out-button {
+    float: right;
+  }
   #sign-out-button:hover {
     background-color: rgb(31, 30, 39, 0.2);
   }
@@ -180,4 +183,9 @@
   }
   section#page-splash {
     background-color:#691d99;
+}
+
+dialog .mdl-dialog__content {
+  height: 360px;
+  overflow: auto;
 }
