@@ -81,8 +81,7 @@
           <div id="menu-my-top-posts" class="mdl-layout__tab mdl-button mdl-js-button mdl-js-ripple-effect hidden">
             <i class="material-icons">trending_up</i> Edit
           </div>
-          <button
-            class="mdl-button mdl-js-button mdl-button--fab mdl-color--grey-200 mdl-shadow--4dp mdl-js-ripple-effect"
+          <button disabled class="mdl-button mdl-js-button mdl-button--fab mdl-color--grey-200 mdl-shadow--4dp mdl-js-ripple-effect"
             id="add-internship" title="Create New Internship">
             <i class="material-icons">mode_edit</i>
           </button>
@@ -368,6 +367,16 @@
   <script>
     $(document).ready(function () {
 
+      // Disable edit if not logged in as admin
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          // User is signed in.  
+          if(user.email == 'admin@internstem.com') {
+            $('button#add-internship').removeAttr('disabled');
+          }
+        } 
+      });
+      
       // Dialog
       var dialog = document.querySelector('dialog');
       var showDialogButton = document.querySelector('#add-internship');

@@ -396,7 +396,7 @@ function startDatabaseQueries() {
                 internship.deadline = intern.deadline || 'NA'
                 internship.submision = intern.submision || 'NA'
                 internship.added = intern.added || 'NA'
-                console.log(JSON.stringify(data.val()));
+                //console.log(JSON.stringify(data.val()));
                 internshipList.push(internship);
                 //var containerElement = sectionElement.getElementsByClassName('posts-container')[0];
                 //containerElement.insertBefore(
