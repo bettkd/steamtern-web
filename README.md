@@ -19,5 +19,7 @@ install:
     
 
 deploy:
+
     - push to github
+    
     - ```npm run deploy```
